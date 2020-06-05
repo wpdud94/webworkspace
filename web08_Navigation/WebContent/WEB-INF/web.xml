@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>servlet.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchMemeberServlet</display-name>
+    <servlet-name>SearchMemeberServlet</servlet-name>
+    <servlet-class>servlet.controller.SearchMemeberServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchMemeberServlet</servlet-name>
+    <url-pattern>/SMS</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RedirectServlet2</display-name>
+    <servlet-name>RedirectServlet2</servlet-name>
+    <servlet-class>servlet.redirect.RedirectServlet2</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RedirectServlet2</servlet-name>
+    <url-pattern>/RedirectServlet2</url-pattern>
+  </servlet-mapping>
+</web-app>

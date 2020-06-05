@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="header">
+	<h2>도서 등록 화면</h2>
+</div>
+<form action="Register">
+<div id="wraaper">
+	<table>
+		<tr>
+			<td colspan="5"></td>
+		</tr>
+		<tr>
+			<td colspan="5"></td>
+		</tr>
+		<tr>
+			<td><span>＊</span> 도서번호</td>
+			<td colspan="4"><input type="text" name="isbn1">-<input type="text" name="isbn2">-<input type="text" name="isbn3"></td>
+		</tr>
+		<tr>
+			<td><span>＊</span> 도서제목</td>
+			<td colspan="4"><input type="text" name="title"></td>
+		</tr>
+		<tr>
+			<td><span>＊</span> 도서종류</td>
+			<td colspan="4">
+				<select name="genre">
+					<option value="" selected disabled hidden>해당 항목을 선택하세요</option>
+					<option value="romance">로맨스</option>
+					<option value="history">역사</option>
+					<option value="acamedy">학술</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><span>■</span> 출판국가</td>
+			<td colspan="4">
+				<input type="radio" name="country" value="domestic">국내도서 
+				<input type="radio" name="country" value="foreign">국외도서
+			</td>
+		</tr>
+		<tr>
+			<td><span>■</span> 출 판 일</td>
+			<td colspan="4">
+				<input type="text" name="publishDate">
+			</td>
+		</tr>
+		<tr>
+			<td><span>■</span> 출 판 사</td>
+			<td colspan="4">
+				<select name="publisher">
+					<option value="" selected disabled hidden>해당 항목을 선택하세요</option>
+					<option value="지학사">지학사</option>
+					<option value="창비">창비</option>
+					<option value="인테터">인테터</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><span>＊</span> 저   자</td>
+			<td colspan="4">
+				<input type="text" name="author">
+			</td>
+		</tr>
+		<tr>
+			<td><span>■</span> 도서가격</td>
+			<td colspan="4">
+				<input type="text" name="price"> &nbsp;
+				<select name="unit">
+					<option value="원">원</option>
+					<option value="달러">달러</option>
+					<option value="위안">위안</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><span>＊</span> 요약내용</td>
+			<td colspan="4">
+				<textarea rows="5" cols="20" name="summary"></textarea>
+			</td>
+		</tr>
+	</table>
+	<div id="btn">
+		<input type="submit" value="도서등록">
+		<button name="cancel">취소</button>
+	</div>
+</div>
+</form>
+<div id="footer">
+	<p id="f1">사전 도움말 - 이용약관 - 개인정보취급방침 - 책임의 한계와 법적고지 - 고객센터</p>
+	<p id="f2">Copyright c 2020. HaBaRee. All Right Reserved</p>
+</div>
+</body>
+</html>
