@@ -8,7 +8,7 @@
 <div id="header">
 	<h2>도서 등록 화면</h2>
 </div>
-<form action="Register">
+<form action="../Register">
 <div id="wraaper">
 	<table>
 		<tr>
@@ -28,7 +28,7 @@
 		<tr>
 			<td><span>＊</span> 도서종류</td>
 			<td colspan="4">
-				<select name="genre">
+				<select name="catalogue">
 					<option value="" selected disabled hidden>해당 항목을 선택하세요</option>
 					<option value="romance">로맨스</option>
 					<option value="history">역사</option>
@@ -39,14 +39,14 @@
 		<tr>
 			<td><span>■</span> 출판국가</td>
 			<td colspan="4">
-				<input type="radio" name="country" value="domestic">국내도서 
-				<input type="radio" name="country" value="foreign">국외도서
+				<input type="radio" name="nation" value="domestic">국내도서 
+				<input type="radio" name="nation" value="foreign">국외도서
 			</td>
 		</tr>
 		<tr>
 			<td><span>■</span> 출 판 일</td>
 			<td colspan="4">
-				<input type="text" name="publishDate">
+				<input type="text" name="publish_date">
 			</td>
 		</tr>
 		<tr>
@@ -70,7 +70,7 @@
 			<td><span>■</span> 도서가격</td>
 			<td colspan="4">
 				<input type="text" name="price"> &nbsp;
-				<select name="unit">
+				<select name="currency">
 					<option value="원">원</option>
 					<option value="달러">달러</option>
 					<option value="위안">위안</option>
@@ -80,7 +80,7 @@
 		<tr>
 			<td><span>＊</span> 요약내용</td>
 			<td colspan="4">
-				<textarea rows="5" cols="20" name="summary"></textarea>
+				<textarea rows="5" cols="20" name="description"></textarea>
 			</td>
 		</tr>
 	</table>

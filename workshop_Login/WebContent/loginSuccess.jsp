@@ -1,5 +1,14 @@
+<%@page import="servlet.Model.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+UserVO uvo = (UserVO) session.getAttribute("uvo");
+if(uvo==null){
+%>
+	<a href="login.html">로그인 먼저 해주세요</a>
+<%	
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,13 +36,19 @@
 </style>
 </head>
 <body>
+<%
+if(uvo!=null){
+%>
 <div id="wrap">
-<%= request.getParameter("userid") %>
+<%= uvo.getUserid() %>
 <b> 님이 로그인 되셨습니다!!!</b>
 <br><br><br><br>
-<a href="Book.html">도서 등록</a>
+<a href="./book/Book.html">도서 등록</a>
 <br><br>
-<a href="login.html">로그아웃</a>
+<a href="loginout.jsp">로그아웃</a>
 </div>
+<%
+}
+%>
 </body>
 </html>

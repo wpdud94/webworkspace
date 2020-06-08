@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,45 +20,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.net.DispatchType;
 
-import servlet.Model.MemberVO;
+import servlet.Model.UserDAOImpl;
+import servlet.Model.UserVO;
 
 
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String path;
-	List<MemberVO> list = Collections.synchronizedList(new ArrayList<MemberVO>());
-	List<String> tlist = new ArrayList<>();
-	String line;
-	int size = 0;
+
     public MainServlet() {
     }
-
-	public void init() throws ServletException {
-		//0. path 초기화
-		path = getInitParameter("path");
-		//1. 경로설정
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(path));
-			//2. 메모장 내용 받기
-			while((line=br.readLine())!= null) {
-				tlist.add(line);
-			}
-			System.out.println(tlist.size());
-			
-			br.close();
-		
-		} catch (FileNotFoundException e) {
-			System.out.println("BufferedReader 문제");
-			//e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("readLine() 문제");
-			//e.printStackTrace();
-		}
-		
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
@@ -68,41 +43,28 @@ public class MainServlet extends HttpServlet {
 	}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		//3. 메모장 내용 필드별로 나누기... VO 생성
-		for(int i=0;i<tlist.size();i++) {
-			String[] farr = tlist.get(i).split(",");
-			list.add(new MemberVO(farr[0], farr[1], farr[2], farr[3]));
-		}
-		//System.out.println(list);
-		//4. 폼값 받기
-
+		//1. 폼값 받기
 		String getId = request.getParameter("userid");
 		String getPass = request.getParameter("password");
-		//System.out.println(getId);
-		//System.out.println(getPass);
 		
-		//5. 비교
-		boolean flag = false;
-		for(int i=0;i<list.size();i++) {
-			if(list.get(i).getUserid().equals(getId)&&list.get(i).getPassword().equals(getPass)) {
-				flag=true;
-				//System.out.println("1");
-				break;
+		//2. DAO, Biz
+		UserDAOImpl dao = UserDAOImpl.getInstance();
+		try {
+			//3. vo객체생성
+			UserVO uvo = dao.login(getId, getPass);
+			if(uvo!=null) {
+				//3. session 바인딩
+				HttpSession session = request.getSession();
+				session.setAttribute("uvo", uvo);
+				//4. navigation
+				response.sendRedirect("loginSuccess.jsp");
 			}else {
-				flag=false;
-				//System.out.println("2");
+				response.sendRedirect("error.jsp");
 			}
+		} catch (SQLException e) {
+			System.out.println("SQL코드 오류");
 		}
-		if(flag) {
-			//out.println("<a href = loginSuccess.jsp?id="+getId+">click here</a>");
-			RequestDispatcher rdp =request.getRequestDispatcher("loginSuccess.jsp");
-			rdp.forward(request, response);
-		}else {
-			//out.println("<a href = error.jsp?id="+getId+">click here</a>");
-			RequestDispatcher rdp =request.getRequestDispatcher("error.jsp");
-			rdp.forward(request, response);
-		}
+		
 	}
 
 }

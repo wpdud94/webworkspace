@@ -3,121 +3,94 @@ package servlet.Model;
 public class BookVO {
 	private String isbn;
 	private String title;
-	private String genre;
-	private String country;
-	private String publishDate;
+	private String catalogue;
+	private String nation;
+	private String publish_date;
 	private String publisher;
 	private String author;
 	private int price;
-	private String unit;
-	private String summary;
+	private String currency;
+	private String description;
 	
-	public BookVO(String isbn, String title, String genre, String country, String publishDate, String publisher,
-			String author, int price, String unit, String summary) {
+	public BookVO() {};
+	public BookVO(String isbn, String title, String catalogue, String nation, String publish_date, String publisher,
+			String author, int price, String currency, String description) {
 		super();
 		this.isbn = isbn;
 		this.title = title;
-		this.genre = genre;
-		this.country = country;
-		this.publishDate = publishDate;
+		this.catalogue = catalogue;
+		this.nation = nation;
+		this.publish_date = publish_date;
 		this.publisher = publisher;
 		this.author = author;
 		this.price = price;
-		this.unit = unit;
-		this.summary = summary;
+		this.currency = currency;
+		this.description = description;
 	}
-
 	public String getIsbn() {
 		return isbn;
 	}
-
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public String getGenre() {
-		return genre;
+	public String getCatalogue() {
+		return catalogue;
 	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setCatalogue(String catalogue) {
+		this.catalogue = catalogue;
 	}
-
-	public String getCountry() {
-		return country;
+	public String getNation() {
+		return nation;
 	}
-
-	public void setCountry(String country) {
-		this.country = country;
+	public void setNation(String nation) {
+		this.nation = nation;
 	}
-
-	public String getPublishDate() {
-		return publishDate;
+	public String getPublish_date() {
+		return publish_date;
 	}
-
-	public void setPublishDate(String publishDate) {
-		this.publishDate = publishDate;
+	public void setPublish_date(String publish_date) {
+		this.publish_date = publish_date;
 	}
-
 	public String getPublisher() {
 		return publisher;
 	}
-
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-
 	public String getAuthor() {
 		return author;
 	}
-
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
 	public int getPrice() {
 		return price;
 	}
-
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
-	public String getUnit() {
-		return unit;
+	public String getCurrency() {
+		return currency;
 	}
-
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
-
-	public String getSummary() {
-		return summary;
+	public String getDescription() {
+		return description;
 	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
 	@Override
 	public String toString() {
-		return "BookVO [isbn=" + isbn + ", title=" + title + ", genre=" + genre + ", country=" + country
-				+ ", publishDate=" + publishDate + ", publisher=" + publisher + ", author=" + author + ", price="
-				+ price + ", unit=" + unit + ", summary=" + summary + "]";
+		return "BookVO [isbn=" + isbn + ", title=" + title + ", catalogue=" + catalogue + ", nation=" + nation
+				+ ", publish_date=" + publish_date + ", publisher=" + publisher + ", author=" + author + ", price="
+				+ price + ", currency=" + currency + ", description=" + description + "]";
 	}
-	
-	
-	
-	
-	
-	
-
 }

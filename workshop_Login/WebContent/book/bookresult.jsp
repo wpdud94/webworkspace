@@ -14,6 +14,7 @@
 <h3>정상적으로 저장되었습니다.</h3>
 <h4>저장 도서 내용</h4>
 도서번호 : <%= book.getIsbn()%> <br>
-도서이름 : <%= book.getTitle()%>
+도서이름 : <%= book.getTitle()%><p>
+<a href="loginSuccess.jsp">Home으로</a>
 </body>
 </html>

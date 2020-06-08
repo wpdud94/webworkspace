@@ -1,6 +1,7 @@
 package servlet.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import servlet.Model.BookDAOImpl;
 import servlet.Model.BookVO;
 
 public class BookResgister extends HttpServlet {
@@ -41,13 +43,13 @@ public class BookResgister extends HttpServlet {
 		String title = request.getParameter("title");
 		//System.out.println(title);
 		//genre
-		String genre = request.getParameter("genre");
+		String catalogue = request.getParameter("catalogue");
 		//System.out.println(genre);
 		//country
-		String country = request.getParameter("country");
+		String nation = request.getParameter("nation");
 		//System.out.println(country);
 		//publishDate
-		String publishDate= request.getParameter("publishDate");
+		String publish_date= request.getParameter("publish_date");
 		//System.out.println(publishDate);
 		//publisher
 		String publisher = request.getParameter("publisher");
@@ -61,20 +63,27 @@ public class BookResgister extends HttpServlet {
 		//System.out.println(price);
 
 		//unit
-		String unit = request.getParameter("unit");
+		String currency = request.getParameter("currency");
 		//System.out.println(unit);
 		//summary
-		String summary = request.getParameter("summary");
+		String description = request.getParameter("description");
 		//System.out.println(summary);
 		
 		//2. VO 객체 생성
-		BookVO book = new BookVO(isbn, title, genre, country, publishDate, publisher, author, price, unit, summary);
+		BookVO book = new BookVO(isbn, title, catalogue, nation, publish_date, publisher, author, price, currency, description);
 		
+		//3. dao, biz
+		BookDAOImpl dao = BookDAOImpl.getInstance();
+		try {
+			dao.registerBook(book);
+		} catch (SQLException e) {
+			System.out.println("코드 오류");
+		}
 		//3. RequestServlet에 저장
 		request.setAttribute("book", book);
 		
 		//4. jsp로 이동
-		RequestDispatcher rdp = request.getRequestDispatcher("bookresult.jsp");
+		RequestDispatcher rdp = request.getRequestDispatcher("book/bookresult.jsp");
 		rdp.forward(request, response);
 		
 	}
