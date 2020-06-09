@@ -8,40 +8,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
+import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import config.ServerInfo;
 
+
 public class MemberDAOImpl implements MemberDAO {
 	private DataSource ds;
-	private static MemberDAOImpl bookDao = new MemberDAOImpl();
-	private MemberDAOImpl() {
-		try {
-			Class.forName(ServerInfo.DRIVER_NAME);
-			System.out.println("드라이버 로딩 성공");
-		}catch(ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패");
-		}
-		
-	}
-	public static MemberDAOImpl getInstance() {
-		return bookDao;
-	}
-	@Override
-	public Connection getConnection() throws SQLException {
-		Connection conn = DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASS);
-		System.out.println("DB Connection...");
-		return conn;
-	}
+	
 	//싱글톤
-	/*private static MemberDAOImpl dao = new MemberDAOImpl();
+	private static MemberDAOImpl dao = new MemberDAOImpl();
 	private MemberDAOImpl() {
 		try {
 			//Naming Service(JNDI Service, API)...javax.naming.Context
 			InitialContext ic = new InitialContext();
-			
+			System.out.println("InitialContext 생성됨....");
 			ds=(DataSource) ic.lookup("java:comp/env/jdbc/mysql"); // 클래스 하나만 올리기에 필드 선언 괜츈
+			System.out.println("DataSource Loading OK.....");
 		}catch(NamingException e) {
 			System.out.println("DataSource Loading Fail...");
 		}
@@ -54,7 +39,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public Connection getConnection() throws SQLException {
 		System.out.println("DB Connection Success...");
 		return ds.getConnection();//공장에서 하나의 Connection을 빌려서 나온다
-	}*/
+	}
 
 	@Override
 	public void closeAll(PreparedStatement ps, Connection conn) throws SQLException {
@@ -117,20 +102,25 @@ public class MemberDAOImpl implements MemberDAO {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		MemberVO vo = new MemberVO();
+		MemberVO vo = null;
 		
 		try {
 			conn = getConnection();
 			String query = "SELECT id, password, name, address FROM member WHERE id = ?";
 			ps = conn.prepareStatement(query);
+			
 			ps.setString(1, id);
 			
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				vo.setId(rs.getString("id"));
-				vo.setPassword(rs.getString("password"));
-				vo.setName(rs.getString("name"));
-				vo.setAddr(rs.getString("address"));
+				/*mvo.setId(id);
+				mvo.setPassword(rs.getString("password"));
+				mvo.setName(rs.getString("name"));
+				mvo.setAddr(rs.getString("address"));*/
+				vo = new MemberVO(id, 
+						rs.getString("password"), 
+						rs.getString("name"), 
+						rs.getString("address"));
 		}
 		}finally {
 			closeAll(rs, ps, conn);
@@ -138,19 +128,19 @@ public class MemberDAOImpl implements MemberDAO {
 		return vo;
 	}
 	
-	public static void main(String[] args) throws SQLException {
+	/*public static void main(String[] args) throws SQLException {
 		MemberDAOImpl dao = MemberDAOImpl.getInstance();
 		
 		//dao.registerMember(new MemberVO("korea", "1122", "장나라", "중국"));
 		System.out.println(dao.showAllMember());
 		System.out.println(dao.findByIdMember("korea"));
-	}
+	}*/
 	
 	public MemberVO login(String id, String password) throws SQLException{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		MemberVO vo = null;
+		MemberVO vo = new MemberVO();
 		
 		try {
 			conn = getConnection();

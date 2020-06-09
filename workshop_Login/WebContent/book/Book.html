@@ -3,6 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$('input[type=submit]').click(function() {
+		
+		if($('#isbn1').val()==""){
+			$('#isbn1').focus();
+			alert('도서번호를 입력해주세요');
+			return false;
+		}
+		if($('#isbn2').val()==""){
+			$('#isbn2').focus();
+			alert('도서번호를 입력해주세요');
+			return false;
+		}
+		if($('#isbn3').val()==""){
+			$('#isbn3').focus();
+			alert('도서번호를 입력해주세요');
+			return false;
+		}
+		if($('#title').val()==""){
+			$('#title').focus();
+			alert('제목을 입력해주세요');
+			return false;
+		}
+		if($('#catalogue').val()==""){
+			$('#catalogue').focus();
+			alert('도서종류를 입력해주세요');
+			return false;
+		}
+		if($('#author').val()==""){
+			$('#author').focus();
+			alert('저자를 입력해주세요');
+			return false;
+		}
+		if($('#description').val()==""){
+			$('#description').focus();
+			alert('요약을 입력해주세요');
+			return false;
+		}
+		if(isNaN($('#price').val())){
+			$('#price').focus();
+			alert('가격을 숫자로 입력해주세요');
+			return false;
+		}
+		
+	})
+});//function
+</script>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	body{
+		margin: 0 auto;
+		width: 1000px;
+	}
+	#header{
+		width: 100%;
+		height: 50px;
+		text-align: center;
+		background-color: #E3E3E3;
+		vertical-align: center;
+	}
+		#header h2{
+			padding-top: 0px;
+		}
+	
+</style>
 </head>
 <body>
 <div id="header">
@@ -15,20 +86,20 @@
 			<td colspan="5"></td>
 		</tr>
 		<tr>
-			<td colspan="5"></td>
+			<td colspan="5" style="text-align: right;">* 표시가 된 항목은 필수 입력 항목입니다.</td>
 		</tr>
 		<tr>
 			<td><span>＊</span> 도서번호</td>
-			<td colspan="4"><input type="text" name="isbn1">-<input type="text" name="isbn2">-<input type="text" name="isbn3"></td>
+			<td colspan="4"><input type="text" name="isbn1" id="isbn1">-<input type="text" name="isbn2" id="isbn2">-<input type="text" name="isbn3" id="isbn3"></td>
 		</tr>
 		<tr>
 			<td><span>＊</span> 도서제목</td>
-			<td colspan="4"><input type="text" name="title"></td>
+			<td colspan="4"><input type="text" name="title" id="title"></td>
 		</tr>
 		<tr>
 			<td><span>＊</span> 도서종류</td>
 			<td colspan="4">
-				<select name="catalogue">
+				<select name="catalogue" id="catalogue">
 					<option value="" selected disabled hidden>해당 항목을 선택하세요</option>
 					<option value="romance">로맨스</option>
 					<option value="history">역사</option>
@@ -63,13 +134,13 @@
 		<tr>
 			<td><span>＊</span> 저   자</td>
 			<td colspan="4">
-				<input type="text" name="author">
+				<input type="text" name="author" id="author">
 			</td>
 		</tr>
 		<tr>
 			<td><span>■</span> 도서가격</td>
 			<td colspan="4">
-				<input type="text" name="price"> &nbsp;
+				<input type="text" name="price" id="price"> &nbsp;
 				<select name="currency">
 					<option value="원">원</option>
 					<option value="달러">달러</option>
@@ -80,7 +151,7 @@
 		<tr>
 			<td><span>＊</span> 요약내용</td>
 			<td colspan="4">
-				<textarea rows="5" cols="20" name="description"></textarea>
+				<textarea rows="5" cols="20" name="description" id="description"></textarea>
 			</td>
 		</tr>
 	</table>

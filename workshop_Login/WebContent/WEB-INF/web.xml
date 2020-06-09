@@ -44,4 +44,14 @@
     <servlet-name>BookResgister</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AllBookServlet</display-name>
+    <servlet-name>AllBookServlet</servlet-name>
+    <servlet-class>servlet.controller.AllBookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllBookServlet</servlet-name>
+    <url-pattern>/AllBookServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

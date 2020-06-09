@@ -75,6 +75,9 @@ public class BookDAOImpl implements BookDAO{
 		}
 		
 	}
-
-
+	/*public static void main(String[] args) throws SQLException {
+		BookDAOImpl bookDao = new BookDAOImpl();
+		bookDao.registerBook(new BookVO("11", "11", "11", "11", "2020-02-02", "11", "11", 1, "11", "11"));
+	}
+*/
 }

@@ -27,8 +27,7 @@
 </head>
 <body>
 <div id="wrap">
-<%= request.getParameter("userid") %>
-<b> 님의 정보가 없습니다.</b><p></p><br><br>
+<b> 정보가 없습니다.</b><p></p><br><br>
 <b><a href="login.html">로그인 페이지로 돌아가기 </a></b>
 </div>
 </body>

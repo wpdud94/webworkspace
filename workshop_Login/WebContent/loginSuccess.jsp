@@ -1,14 +1,15 @@
 <%@page import="servlet.Model.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-UserVO uvo = (UserVO) session.getAttribute("uvo");
-if(uvo==null){
-%>
-	<a href="login.html">로그인 먼저 해주세요</a>
-<%	
-}
-%>
+<%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:choose>
+	<c:when test="${uvo==null}">
+		<script>
+			alert('로그인 먼저 해주세요');
+			location.href="login.html";
+		</script>
+	</c:when>
+	<c:otherwise>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,19 +37,14 @@ if(uvo==null){
 </style>
 </head>
 <body>
-<%
-if(uvo!=null){
-%>
 <div id="wrap">
-<%= uvo.getUserid() %>
-<b> 님이 로그인 되셨습니다!!!</b>
+<b> ${uvo.userid}님이 로그인 되셨습니다!!!</b>
 <br><br><br><br>
 <a href="./book/Book.html">도서 등록</a>
 <br><br>
 <a href="loginout.jsp">로그아웃</a>
 </div>
-<%
-}
-%>
+	</c:otherwise>
+</c:choose>
 </body>
 </html>
