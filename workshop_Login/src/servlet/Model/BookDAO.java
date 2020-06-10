@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
@@ -22,4 +23,5 @@ public interface BookDAO {
 	//비지니스로직
 	//1. 책 등록
 	void registerBook(BookVO vo) throws SQLException;
+	ArrayList<BookVO> AllBooks() throws SQLException;
 }

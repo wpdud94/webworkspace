@@ -94,12 +94,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return vo;
 	}
 	
-	public static void main(String[] args) throws SQLException {
+	/*public static void main(String[] args) throws SQLException {
 		MemberDAOImpl dao = MemberDAOImpl.getInstance();
 		
 		//dao.registerMember(new MemberVO("korea", "1122", "장나라", "중국"));
 		System.out.println(dao.showAllMember());
 		System.out.println(dao.findByIdMember("korea"));
-	}
+	}*/
 
 }

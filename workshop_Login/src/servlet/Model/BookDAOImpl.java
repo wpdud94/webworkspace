@@ -5,10 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 import config.ServerInfo;;
 
@@ -75,9 +77,98 @@ public class BookDAOImpl implements BookDAO{
 		}
 		
 	}
+	
+	public ArrayList<BookVO> AllBooks() throws SQLException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<BookVO> list = new ArrayList<BookVO>();
+		
+		try {
+			conn=getConnection();
+			String query = "SELECT * FROM book";
+			ps=conn.prepareStatement(query);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				BookVO vo = new BookVO(
+						rs.getString("isbn"),
+						rs.getString("title"),
+						rs.getString("catalogue"), 
+						rs.getString("nation"), 
+						rs.getString("publish_date"),
+						rs.getString("publisher"),
+						rs.getString("author"),
+						rs.getInt("price"), 
+						rs.getString("currency"), 
+						rs.getString("description"));
+				list.add(vo);
+			}
+		}finally {
+			closeAll(rs, ps, conn);
+		}
+		return list;
+	}
+	
+	public ArrayList<BookVO> findBook(String searchType, String searchContent) throws SQLException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<BookVO> list = new ArrayList<BookVO>();
+		String query="";
+		try {
+			conn=getConnection();
+			StringBuilder sb = new StringBuilder();	
+			if(searchType.equals("all")) {
+				query = "select * FROM book WHERE title Like ? OR publisher Like ? OR price Like ?";
+				ps=conn.prepareStatement(query);
+				
+				ps.setString(1, "%"+searchContent+"%");
+				ps.setString(2, "%"+searchContent+"%");
+				ps.setString(3, "%"+searchContent+"%");
+				System.out.println("%"+searchContent+"%");
+				
+			}else if(searchType.equals("title")){
+				query="select * FROM book WHERE title Like ?";
+				ps=conn.prepareStatement(query);
+				ps.setString(1, "%"+searchContent+"%");
+			}
+			else if(searchType.equals("publisher")){
+				query="select * FROM book WHERE publisher Like ?";
+				ps=conn.prepareStatement(query);
+				ps.setString(1, "%"+searchContent+"%");
+			}else if(searchType.equals("price")){
+				query="select * FROM book WHERE price Like ?";
+				ps=conn.prepareStatement(query);
+				ps.setString(1, "%"+searchContent+"%");
+			}
+			System.out.println("1");
+			rs=ps.executeQuery();
+			System.out.println("2");
+			System.out.println(query);
+			while(rs.next()) {
+				list.add(new BookVO(
+						rs.getString("isbn"),
+						rs.getString("title"),
+						rs.getString("catalogue"), 
+						rs.getString("nation"), 
+						rs.getString("publish_date"),
+						rs.getString("publisher"),
+						rs.getString("author"),
+						rs.getInt("price"), 
+						rs.getString("currency"), 
+						rs.getString("description")));
+			}
+			System.out.println(list);
+
+		}finally {
+			closeAll(rs, ps, conn);
+		}
+		
+		return list;
+	}
 	/*public static void main(String[] args) throws SQLException {
 		BookDAOImpl bookDao = new BookDAOImpl();
 		bookDao.registerBook(new BookVO("11", "11", "11", "11", "2020-02-02", "11", "11", 1, "11", "11"));
-	}
-*/
+	}*/
+
 }

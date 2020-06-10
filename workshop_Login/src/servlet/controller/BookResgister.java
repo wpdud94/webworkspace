@@ -75,10 +75,12 @@ public class BookResgister extends HttpServlet {
 		//3. dao, biz
 		BookDAOImpl dao = BookDAOImpl.getInstance();
 		try {
+			System.out.println(3);
 			dao.registerBook(book);
 		} catch (SQLException e) {
 			System.out.println("코드 오류");
 		}
+		System.out.println(4);
 		//3. RequestServlet에 저장
 		request.setAttribute("book", book);
 		

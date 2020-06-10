@@ -49,9 +49,21 @@
     <display-name>AllBookServlet</display-name>
     <servlet-name>AllBookServlet</servlet-name>
     <servlet-class>servlet.controller.AllBookServlet</servlet-class>
+    <load-on-startup>3</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>AllBookServlet</servlet-name>
     <url-pattern>/AllBookServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FindBookServlet</display-name>
+    <servlet-name>FindBookServlet</servlet-name>
+    <servlet-class>servlet.controller.FindBookServlet</servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindBookServlet</servlet-name>
+    <url-pattern>/FindBookServlet</url-pattern>
   </servlet-mapping>
 </web-app>

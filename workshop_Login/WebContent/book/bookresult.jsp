@@ -15,11 +15,11 @@
 <h4>저장 도서 내용</h4>
 도서번호 : ${book.isbn} <br>
 도서이름 : ${book.title}<p>
-<footer>
-	<div id="footer">
-		<a href="Book.html">추가 등록</a> <a href="#">도서목록</a>
-	</div>
-</footer>
+
+<div id="footer">
+	<a href="Book.html">추가 등록</a> <a href="AllBookServlet">도서목록</a>
+</div>
 <a href="loginSuccess.jsp">Home으로</a>
+
 </body>
 </html>
