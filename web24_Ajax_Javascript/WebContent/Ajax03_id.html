@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>비동기 통신으로 id 전송하기</title>
+<script type="text/javascript">
+	var xhr;
+	var uid;
+	function startRequest() {//요청 관련된 로직
+		uid = document.frm.userId.value;
+		
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = callback;//응답받을 곳 지정
+		xhr.open("get","AjaxServlet?userId="+uid);
+		xhr.send(null);
+	}
+	
+	function callback() {//응답 관련된 로직
+		document.getElementById("resultView").innerHTML= "<p>d</p>"
+		if(xhr.readystate==4){
+			if(xhr.status==200){
+				//resultView 영역에 전발받은 Id값을 출력... 파란색 5크기로
+				document.getElementById("resultView").innerHTML= "<p>d</p>"
+				document.getElementById("resultView").innerHTML 
+				= "<font color=blue size=5>"+xhr.responseText+"</font>";
+				document.frm.userId.value="";
+				document.frm.userId.focus();
+			}
+		}else{//2, 3인 경우
+			//a.gif를 출력
+			document.getElementById("resultView").innerHTML =
+				"<img src=img/a.gif width=300 height = 200>";
+		}
+		
+	}
+</script>
+</head>
+<body>
+<h2>비동기 통신으로 id 전송하기</h2>
+<form name="frm">
+아이디 : <input type="text" name = "userId" >
+<input type="submit" value ="아이디 전송하기" onclick="startRequest()">
+<div id="resultView">
+
+</div>
+</form>
+</body>
+</html>

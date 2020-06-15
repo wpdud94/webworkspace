@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var xhr;
+	function startRequest() {
+		var id = document.getElementById("id").value;
+		xhr = new XMLHttpRequest;
+		xhr.onreadystatechange=callback;
+		xhr.open("get","idCheck.do?");
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
+		xhr.send("id="+id);
+	}
+	function callback() {
+		var flag = xhr.responseText;
+		if(xhr.readyState==4){
+			if(xhr.status==200){
+				if(flag=="false"){
+					document.getElementById("idcheckView").innerHTML
+					= "<font color=green size=4>사용가능</font>";
+				}else{
+					document.getElementById("idcheckView").innerHTML
+					= "<font color=red size=4>사용불가능</font>";
+				}
+			}
+		}
+	}
+</script>
+</head>
+<body>
+<h3>회원가입</h3>
+<!-- register_action에서 하고있는 기능이  RegisterServletd으로 이동
+	 register_result.jsp로 결과를 보낸다.
+-->
+<form action="register.do" name="registerForm" >
+ID : <input type="text" name="id" id="id" required="required">
+<input type="button" value="중복확인" onclick="startRequest()"> <span id="idcheckView"></span> <br><br>
+PASSWORD : <input type="password" name="password" required="required"><br><br>
+NAME : <input type="text" name="name" required="required"><br><br>
+ADDRESS : <input type="text" name="address" required="required"><br><br>
+
+<input type="submit" value="member register">
+	</form>
+</body>
+</html>
