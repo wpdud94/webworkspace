@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,4 +36,43 @@ var xhr;
 <p></p>
 <span id="resultView"></span>
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var xhr;
+	function startRequest() {//요청에 해당하는 로직을 담는 메소드
+		//비동기통신 문법
+		xhr = new XMLHttpRequest();//이 친구가 필드와 메소드 다 담당
+		//alert(xhr.readyState); //...0
+		
+		xhr.onreadystatechange = callback;//응답받는 메소드
+		//alert(xhr.readyState); //...0
+		xhr.open("get", "CountServlet?id=ajax&&pass=1212",true ); // 1.요청방식 2.요청받을 서블릿(get방식으로 자료넘길 수 있음)
+		//alert(xhr.readyState); //...1
+		xhr.send(null);//실질적인 요청을 서버로 보내기
+		//get방식이기 때문에 객체가 아닌 주소에 붙여서 가기 때문에 null
+		//alert(xhr.readyState); //...1
+	}
+	function callback() {// 응답에 해당하는 로직을 담는 메소드
+		if(xhr.readyState==4){
+			if(xhr.status==200){
+				var text= xhr.responseText;//찍어보기
+				document.getElementById("resultView").innerHTML =
+					"<h4><font color=blue>"+text+"</font></h4>";
+			}
+		}
+	}
+</script>
+</head>
+<body>
+<h2>Show Count</h2>
+<input type="button" value="count 증가" onclick="startRequest()">
+<p></p>
+<span id="resultView"></span>
+</body>
+>>>>>>> d9ea64e93bef5caf88d823372a320ce5c91403dc
 </html>
