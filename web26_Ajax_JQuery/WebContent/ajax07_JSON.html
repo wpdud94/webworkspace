@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#json-Btn').click(function() {
+			$.ajax({
+				type:'post',
+				url:'JasonAjax',
+				dataType:'json',
+				
+				success:function(data) {
+					$('#resultView').html(data.food);
+				}//callback
+			});//ajax
+		});//click
+	});//ready
+</script>
+</head>
+<body>
+	<input type="button" value="json-Btn" id="json-Btn">
+	<span id="resultView"></span>
+</body>
+</html>

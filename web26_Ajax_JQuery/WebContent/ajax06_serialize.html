@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Async JQuery Serialize: 여러 개 폼</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+/* 
+Submit 대신 button+click+Async 조합 ==> 안 넘어감
+폼이 여러 개, 하나의 서블릿으로 ==> command를 달리하면 됨
+*/
+	$(function() {
+		$('#regBtn').click(function() {
+			$.ajax({
+				type:'post',
+				url:'SerialAjax',
+				data: $('#frm').serialize(), // 통으로 다 넘어간다
+				
+				success:function(data){
+					$('#regView').html(data).css({
+						'background':'yellow',
+						'font-weight':'bold',
+						'color':'blue'
+					})
+				}//callback
+			});//ajax
+		});//click
+		
+		$('#id').keyup(function() {
+			/* 
+			id가 4~8자만 허용... 아니면 메세지 띄우기
+			맞으면, ajax --> SerialAjax로 요청
+			true == 사용불가.. red
+			false == 사용가능를 출력..blue
+			*/
+			if($(this).val().length<4||$(this).val().length>8){
+				$('#idCheckView').html('아이디는 4~8자이어야 합니다.').css({
+					'color':'red'
+				});
+				return;
+			}//if
+			$.ajax({
+				type:'post',
+				url: 'SerialAjax',
+				data:$('#idFrm').serialize(),
+				success : function(data) {
+					var flag = data;
+					if(flag=="true"){
+						$('#idCheckView').html('사용불가').css({
+							'color':'red'
+						})	
+					}else{
+						$('#idCheckView').html('사용가능').css({
+							'color':'blue'
+						})
+					}
+					
+				}//callback
+			})//ajax
+			
+		})//keyup
+	});//ready
+</script>
+</head>
+<body>
+	<form action="SerialAjax" id="frm">
+	<h2>Register Form</h2>
+		NAME : <input type="text" name="name" id="name"><br/>
+		ADDR : <input type="text" name="addr" id="addr"><br/>
+		<input type="hidden" name="command" value="register"><p/>
+		<input type="button" value="가입" id="regBtn">
+	</form>
+	<hr>
+	<div id="regView"></div>
+	<hr>
+	<form action="SerialAjax" name="idFrm" id="idFrm">
+	<h2>Member ID Check... Test</h2>
+		ID : <input type="text" name="id" id="id"><br/>
+		<span id="idCheckView"></span>
+		<input type="hidden" name="command" value="idCheck"><p/>
+	</form>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Serialize: 대부분 폼 사용</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+/* 바로 안 보내고 JQuery 올려 보낸 후 보내기 
+	onclick = click
+	onsubmit = submit: 이때 폼을 선택자로 잡아야 한다
+	
+	serialize() 
+	::
+	일일이 받기에 상당히 많다.
+	폼의 입력된 모든 데이터르 일괄적으로 쿼리스트링(non-Object)으로 만들어서 전송하는 기능
+	Map방식(폼이름:값 && 폼이름 : 값)
+*/
+	$(function() {
+		$('#frm').submit(function() {
+			//alert('aaa');
+			var query=$(this).serialize();
+			alert(query);
+			
+			return false;
+		})//submit
+	});//ready
+</script>
+</head>
+<body>
+	<form action="SerialAjax" id="frm">
+		NAME : <input type="text" name="name" id="name">
+		<input type="hidden" name="command" value="register"><p/>
+		<select name="tool" id="tool">
+			<option>EditPlus</option>
+			<option>Amateras</option>
+			<option>WorkBench</option>
+			<option>ObjectAid</option>
+		</select><p/>
+		
+		<input type="checkbox" name="program" value="python">python
+		<input type="checkbox" name="program" value="Numpy">Numpy
+		<input type="checkbox" name="program" value="Pandas">Pandas <!-- 딥러닝, 데이터분석 -->
+		<input type="checkbox" name="program" value="Matplot">Matplot
+		<p/>
+		<input type="submit" value="FormDataSend">
+	</form>
+</body>
+</html>

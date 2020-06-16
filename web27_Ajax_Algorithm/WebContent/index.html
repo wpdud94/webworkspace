@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Java Call::JSP를 이용한 비동기</title>
+<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#exec1").click(function() {
+			//alert(typeof($('#words').val()));
+			var words = $('#words').val();
+			if($('#words').val()==""){
+				alert('문장을 입력하세요');
+				//$('#words').focus();
+				return;
+			}
+			$.ajax({
+				type:'post',
+				url:'main.do?action=wordCount',
+				data:'words='+words,
+				
+				success: function(data) {
+					//alert(data);
+					$('#result1').html(data);
+				}//callback
+				
+			});//ajax
+		});//ready
+		$("#exec2").click(function() {
+			var fname = $("#fname").val();
+			if(fname==""){
+				alert('파일명을 입력하세요');
+				//$('#words').focus();
+				return;
+			}
+			$.ajax({
+				type:'post',
+				url:'main.do?action=kickCount',
+				data: {'fname':fname},
+				
+				error : function(xhr, status, message) {
+					alert('error : '+message)
+				},
+				
+				success : function(data) {
+					$('#result2').html(data);
+				}
+				
+				
+			})
+		});
+	});
+</script>
+<style type="text/css">
+	.quest {
+		padding: 50px;
+		width: 500px; height: 250px;
+        border: 2px dashed blue;
+		background-color: rgb(234,234,234);
+	}	
+	.kick{
+		display: inline-block;
+		width : 100px;
+	}
+	#result1, #result2 {//이부분
+		font-size : 1.5em;
+		color: red;
+	}
+	.btn{
+		width : 100px;
+	}
+	h2{
+		height: 50px;
+	}
+	div{
+		margin: 10px;//이부분
+	}
+	#ins{
+		vertical-align: top;
+	}
+
+</style>
+</head>
+<body>
+	<div id="q1"  class="quest">
+			<h2>단어세기</h2>
+			<div><span id="ins">입력 문자열 : </span><textarea  id="words" cols="45" rows="5"></textarea> </div>
+			<div><input type="button" id="exec1" class="btn" value="실 행"> 가장 많이 나온 단어 :	<span id="result1"  ></span></div>			
+	</div>
+	<div id="q2" class="quest">
+		<h2>Kickboard</h2>
+		<div><span class="kick">입력 파일명:</span><input type="text" id="fname" ></div>
+		<div> <input type="button"	id="exec2" class="btn" value="실 행"> 갈 수 있는 경로의 수 : <span id="result2">  </span></div>
+	</div>
+</body>
+</html>

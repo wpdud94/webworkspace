@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Async+JQuery 전형</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#ajaxBtn').click(function() {
+			//alert('ajax');
+			$.ajax({
+				type: 'post',
+				url: 'HelloAjaxServlet',
+				data: 'name=encoreAjax',
+				//dataType: 'text',//JSON일 때 주로 사용
+				
+				success: function(data) {
+					alert(data);
+				},//callback
+				error:function(){
+					alert('응답시간이 지연...Error 처리함');
+				},
+				timeout:1000 // 1초 동안 서버로부터 응답이 없으면 에러 발생시킴...(응답대기시간 지정)
+			})//ajax
+		})//click
+		
+	});//ready
+</script>
+</head>
+<body>
+Name : <input type ="text" name = "name" id="name">
+	<input type="button" value="ajaxBtn" id="ajaxBtn">
+</body>
+</html>

@@ -66,4 +66,15 @@
     <servlet-name>FindBookServlet</servlet-name>
     <url-pattern>/FindBookServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>showBookInfo</display-name>
+    <servlet-name>showBookInfo</servlet-name>
+    <servlet-class>servlet.controller.showBookInfo</servlet-class>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showBookInfo</servlet-name>
+    <url-pattern>/showBookInfo</url-pattern>
+  </servlet-mapping>
 </web-app>

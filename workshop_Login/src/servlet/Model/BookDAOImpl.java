@@ -141,10 +141,10 @@ public class BookDAOImpl implements BookDAO{
 				ps=conn.prepareStatement(query);
 				ps.setString(1, "%"+searchContent+"%");
 			}
-			System.out.println("1");
+			//System.out.println("1");
 			rs=ps.executeQuery();
-			System.out.println("2");
-			System.out.println(query);
+			//System.out.println("2");
+			//System.out.println(query);
 			while(rs.next()) {
 				list.add(new BookVO(
 						rs.getString("isbn"),
@@ -165,6 +165,38 @@ public class BookDAOImpl implements BookDAO{
 		}
 		
 		return list;
+	}
+	
+	public BookVO findBook(String isbn) throws SQLException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		BookVO vo = null;
+		try {
+			conn=getConnection();
+			String query = "SELECT * FROM book WHERE isbn =?";
+			ps=conn.prepareStatement(query);
+			ps.setString(1, isbn);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				vo = new BookVO(
+					rs.getString("isbn"),
+					rs.getString("title"),
+					rs.getString("catalogue"), 
+					rs.getString("nation"), 
+					rs.getString("publish_date"),
+					rs.getString("publisher"),
+					rs.getString("author"),
+					rs.getInt("price"), 
+					rs.getString("currency"), 
+					rs.getString("description"));
+			}
+
+		}finally {
+			closeAll(rs, ps, conn);
+		}
+		
+		return vo;
 	}
 	/*public static void main(String[] args) throws SQLException {
 		BookDAOImpl bookDao = new BookDAOImpl();
