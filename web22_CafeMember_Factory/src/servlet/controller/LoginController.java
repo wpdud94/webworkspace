@@ -12,7 +12,6 @@ import servlet.model.MemberVO;
 public class LoginController implements Controller{
 	@Override
 	public ModelAndView handler(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String path = "login_result.jsp";
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		try {
@@ -20,6 +19,6 @@ public class LoginController implements Controller{
 			HttpSession session = request.getSession();
 			session.setAttribute("vo", vo);
 		}catch(SQLException e) {System.out.println("코딩 문제");}
-		return new ModelAndView(path,true);
+			return new ModelAndView("login_result.jsp",true);
 		}
 }

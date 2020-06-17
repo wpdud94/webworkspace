@@ -18,14 +18,7 @@ public class DispatcherServlet extends HttpServlet {
 		doProcess(request, response);
 	}
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//hidden 값으로 들어온 요청을 받지 않고 들어온 요청의 주소를 직접 인식시킨다.
-		String requestURI=request.getRequestURI();
-		System.out.println("RequestURI :: "+requestURI);//web22_CafeMember_Factory/find.do를 리턴
-		String contextPath=request.getContextPath();
-		System.out.println("contextPath :: "+contextPath);
-		
-		//find.do만 추출...substring()사용
-		String command =requestURI.substring(contextPath.length()+1);
+		String command = request.getParameter("command");//
 		
 		Controller controller = HandlerMapping.getInstance().createController(command);
 		String path = "index.jsp";
@@ -34,11 +27,13 @@ public class DispatcherServlet extends HttpServlet {
 		try {
 			mv= controller.handler(request,response);
 			path= mv.getPath();
+			
 		}
 		catch (Exception e) {System.out.println(e);}
-		if(mv!=null) {
+		if(!isRedirect) {
 			if(mv.isRedirect()) response.sendRedirect(path);
-			else request.getRequestDispatcher(path).forward(request, response);;
+			else request.getRequestDispatcher(path).forward(request, response);
+			//System.out.println(request.getParameter("result"));
 		}
 	}
 }
