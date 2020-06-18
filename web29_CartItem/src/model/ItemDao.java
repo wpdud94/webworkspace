@@ -2,7 +2,7 @@ package model;
 /**
  * 
  * @author Playdata
- * 
+ * 상품 관련 비지니스로직을 담은 DAO
  */
 
 import java.sql.Connection;
@@ -64,7 +64,7 @@ public class ItemDao {
 			closeAll(rs, ps, conn);
 		}
 		return list;
-	}
+	}//getAllItem
 	
 	public Item getItem(int itemNumber) throws SQLException {
 		Item item = null;
@@ -91,9 +91,10 @@ public class ItemDao {
 			closeAll(rs, ps, conn);
 		}
 		return item;
-	}
+	}//getItem
 	
-	public void plusCount(int itemNumber) throws SQLException{
+	public boolean plusCount(int itemNumber) throws SQLException{
+		boolean result = false;
 		Connection conn = null;
 		PreparedStatement ps = null;
 		
@@ -102,11 +103,13 @@ public class ItemDao {
 			String query = "UPDATE item SET count = count+1 WHERE item_id =? ";
 			ps=conn.prepareStatement(query);
 			ps.setInt(1, itemNumber);
-			System.out.println(ps.executeUpdate()+" 건의 수정이 완료됐습니다.");
+			int row = ps.executeUpdate();
+			if(row>0) result=true;
 		}finally {
 			closeAll(ps, conn);
 		}
-	}
+		return result;
+	}//plusCount
 	
 	
 	

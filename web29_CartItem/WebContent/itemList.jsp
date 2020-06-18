@@ -20,12 +20,13 @@
 			margin-top: 30px;
 		}
 	
-		#totalList>table{
+		#totalList table{
 			margin: 30px 0 30px 115px;
 		}
 </style>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 </script>
 </head>
 <body>
@@ -36,7 +37,7 @@
 			<c:forEach items="${list}" var="item">
 			<td>
 				<a href ="itemInfo.do?itemNumber=${item.itemNumber}">
-				<img src="${item.url}" width="150" height="150" style="border: 2px solid blue">
+				<img src="${item.url}" width="150" height="150" style="border: 2px solid #014A97">
 				</a><br/>
 				상품명 : ${item.name}<br/>
 				가 격 : ${item.price}원
@@ -44,24 +45,21 @@
 			</c:forEach>
 		</tr>
 	</table>
-	<hr>
-	<%-- <table>
-		<tr>
-			<c:forEach items="${list}" var="item">
-			<td><img src="${item.url}" width="150" height="150" style="border: 2px solid blue"></td>
-			</c:forEach>
-		</tr>
-		<tr>
-			<c:forEach items="${list}" var="item">
-			<td>상품명 : ${item.name}</td>
-			</c:forEach>
-		</tr>
-		<tr>
-			<c:forEach items="${list}" var="item">
-			<td>가 격 : ${item.price}</td>
-			</c:forEach>
-		</tr>
-	</table> --%>
+	
+	<!-- 오늘 본 상품 정보를 이곳에다가 출력 -->
+	<c:if test="${!empty fruits}">
+			<hr>
+			<h2 align="center"><font color = "purple">오늘 본 상품</font></h2>
+			<table align ="center" bgcolor ="lightgray">
+				<tr>
+					<c:forEach items="${fruits}" var="fruit">
+					<td>
+						<img src="${fruit}" width="100" height="100" style="border: 2px solid #014A97">
+					</td>
+					</c:forEach>
+				</tr>
+			</table>
+	</c:if>
 </div>
 </body>
 </html>

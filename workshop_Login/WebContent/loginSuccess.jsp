@@ -44,7 +44,7 @@
 <br><br>
 <a href="loginout.jsp">로그아웃</a>
 <br><br>
-<a href="./book/booklist.jsp">도서 목록</a>
+<a href="AllBookServlet">도서 목록</a>
 </div>
 	</c:otherwise>
 </c:choose>

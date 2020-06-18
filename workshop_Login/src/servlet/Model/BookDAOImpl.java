@@ -125,7 +125,7 @@ public class BookDAOImpl implements BookDAO{
 				ps.setString(1, "%"+searchContent+"%");
 				ps.setString(2, "%"+searchContent+"%");
 				ps.setString(3, "%"+searchContent+"%");
-				System.out.println("%"+searchContent+"%");
+				//System.out.println("%"+searchContent+"%");
 				
 			}else if(searchType.equals("title")){
 				query="select * FROM book WHERE title Like ?";

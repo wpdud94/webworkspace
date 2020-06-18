@@ -14,23 +14,36 @@
 	}
 	
 	body{
-		width: 600px;
+		width: 800px;
 		margin: 0 auto;
 		text-align: center;
 		padding-top: 50px;
 	}
 	#header{
 		margin: 10px 0px;
+		padding: 22px 0px;
+		height: 80px;
+		
 	}
-	#search *{
-		height: 25px;
-		text-align: right;
-		vertical-align: bottom;
-	}
-	table{
-		width: 600px;
-		margin: 10px 0px 10px 0px;
-	}
+		#search *{
+			height: 25px;
+			text-align: right;
+			vertical-align: bottom;
+		}
+		#serach #searchcontent{
+			text-align: left;
+		}
+		#table table{
+			width: 100%;
+			margin: 10px 0px 10px 0px;
+		}
+			#table table td, #table table th{
+				border: 1px solid black;
+				height: 50px;
+			}
+			#table table th{
+				background-color: #e3e3e3;
+			}
 	.bookinfo{
 		color : red;
 		font-weight : bold;
@@ -67,7 +80,7 @@ $(function() {
 </head>
 <body>
 <div id="header">
-	<h2>도서 목록 화면</h2>
+	<h1>도서 목록 화면</h1>
 </div>
 <div id="search">
 <form action="FindBookServlet">
@@ -83,7 +96,7 @@ $(function() {
 </form>
 </div>
 <div id="table">
-	<table border ="2">
+	<table>
 		<thead>
 			<tr>
 				<th>도서번호</th><th>도서명</th><th>도서분류</th><th>저자</th>

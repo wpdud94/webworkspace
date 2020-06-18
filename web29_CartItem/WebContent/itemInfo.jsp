@@ -19,12 +19,17 @@
 		margin: 30px 0px;
 	}
 	#bar{
+		height:25px;
 		margin-bottom:30px;
 		text-align: right;
 		background-color: orange;
 	}
+		#bar button{
+			height: 25px;
+		}
 		#bar>span{
-			margin-right:50px;
+			/* margin-right:50px; */
+			padding-top:6px;
 		}
 
 	#footer{
@@ -34,9 +39,17 @@
 </style>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$('#addCart').on('click', function() {
-		alert(${item.name});
-	});//on
+$(function() {
+	$('button[name=addCart]').click(function() {
+		var key = $(this).attr('id');
+		var value = $(this).attr('value');
+		//alert(key+", "+ value);
+		localStorage.setItem(key,value);
+	});//click
+	$('#checkCart').click(function() {
+		location.href="cart.jsp";
+	});//click
+});//ready
 </script>
 </head>
 <body>
@@ -44,8 +57,9 @@
 <h1 align="center">${item.name} 의 정보</h1>
 </div>
 <div id="bar">
-	<span id="count">조회수 : ${item.count}</span> 
-	<a href="#">장바구니 담기</a>
+	<span id="count">조회수 : ${item.count}</span> &nbsp;&nbsp;&nbsp;
+	<button name = "addCart" id="${item.itemNumber}" value="${item.url},${item.name},${item.price},${item.itemNumber},fruitshop,1">장바구니 담기</button> &nbsp;&nbsp;&nbsp;
+	<button id="checkCart">장바구니 확인</button>
 </div>
 <div id="wrap">
 	<table>
